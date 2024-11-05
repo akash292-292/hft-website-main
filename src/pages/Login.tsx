@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Eye, EyeOff, BarChart } from 'lucide-react';
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Eye, EyeOff, BarChart } from "lucide-react";
+import services from "../services/services";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +25,10 @@ export default function Login() {
         <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email
               </label>
               <input
@@ -39,12 +42,15 @@ export default function Login() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <div className="relative mt-1">
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -68,11 +74,20 @@ export default function Login() {
             <button
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-              onClick={
-                
-              }
+              onClick={() => {
+                services.authentication.emailLogin(email, password);
+              }}
             >
-              Log In
+              Log in
+            </button>
+            <button
+              type="submit"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              onClick={() => {
+                services.authentication.googleSignIn();
+              }}
+            >
+              Google Sign In
             </button>
 
             <div className="text-sm text-center">
@@ -84,16 +99,18 @@ export default function Login() {
 
           <div className="mt-8 space-y-4">
             <div className="text-sm text-gray-700">
-              This Hushh 🤫 Technologies LLC Technologies website (www.hushhtech.com) is by invitation only.
+              This Hushh 🤫 Technologies LLC Technologies website
+              (www.hushhtech.com) is by invitation only.
             </div>
             <ul className="text-sm text-gray-700 space-y-2 list-disc pl-5">
               <li>
-                If you have received an invitation, you must first create a login by following the link 
-                provided in the email sent to you.
+                If you have received an invitation, you must first create a
+                login by following the link provided in the email sent to you.
               </li>
               <li>
-                If you have not received an invitation, and think you should have, please contact your 
-                Hushh 🤫 Technologies LLC representative.
+                If you have not received an invitation, and think you should
+                have, please contact your Hushh 🤫 Technologies LLC
+                representative.
               </li>
             </ul>
           </div>
